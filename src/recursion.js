@@ -66,6 +66,21 @@ var arraySum = function(array) {
 
 };
 
+// ******************* SECOND SOLUTION **************************** 
+
+// var arraySum = function(array) {
+// 	var sum = 0
+// 	for(var i = 0; i < array.length; i++){
+// 		if(Array.isArray(array[i])){
+// 			sum += arraySum(array[i])
+// 		}
+// 		else{
+// 			sum += array[i]
+// 		}
+// 	}
+// 	return sum
+// };
+
 // input  - number negative or positive - 
 // output - true or false - boolean
 // age case - array - flatten 
@@ -74,11 +89,11 @@ var arraySum = function(array) {
 // 4. Check if a number is even.
 var isEven = function(n) {
 	var posNum = Math.abs(n)
+
 	if(posNum === 0) {
-		console.log(true);
 		return true;
+
 	}else if(posNum === 1){ 
-		console.log(false);
 		return false;
 	}	
 	posNum = posNum - 2;
@@ -115,23 +130,27 @@ var sumBelow = function(n) {
 
 };
 
+// ******************* SECOND SOLUTION **************************** 
+
+// var sumBelow = function(n) {
+// 	newNum = Math.abs(n)
+// 	if (newNum === 1 || newNum === 0){
+// 		return 0
+// 	}
+// 	result = newNum - 1 + sumBelow(newNum-1)
+	
+// 	if (n<0){
+// 		result = result * (-1)
+// 		return result
+// 	}else{
+// 		return result
+// 	}
+	
+// };
+
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8] 
-// input - 2 numbers (x & y)
-// output - array of numbers between the 2 input numbers
-// method - 2 to 9
-// x + 1 push into array until x === y
-// 2,5
-// 2 + 1 = 3 - (is x === y) no - push into array [3]
-// 3 + 1 = 4 - (is x === y) no - push into array [3,4] 
-// 4 + 1 = 5 - (is x === y) yes -stop
 
-// 3,5  = return 4
-//x = 3, y = 5
-
-//3,6 = return 4,5
-
-//==================================================
 // input range(2,9)
 
 //steps   x  | y  |      array
@@ -211,8 +230,8 @@ var exponent = function(base, exp) {
 		return base * exponent(base,exp)
     }
     if (exp < 0) {
-    	exp = exp + 1;
-		return (1 / base * exponent(base,exp).toFixed(4))
+    	exp = (-1 * exp) -1;
+		return 1 / (base * exponent(base,exp))
     }
 };
 
@@ -253,6 +272,18 @@ var powerOfTwo = function(n) {
 
 
 };
+
+// ******************* SECOND SOLUTION **************************** 
+
+// var powerOfTwo = function(n) {
+// 	if (n === 1 ){
+// 		return true
+// 	}
+// 	if (n === 0 || n % 2 === 1){
+// 		return false
+// 	}
+// 	return powerOfTwo(n/2)
+// };
 
 // 9. Write a function that reverses a string.
 //input - string
@@ -333,11 +364,22 @@ var palindrome = function(string) {
 
 var modulo = function(x, y) {
 
-	if (x < y) {
-		return x;
-	}
 	if (x === 0 && y === 0){
 		return NaN;
+	}
+
+	// If y is negative, transform to positive. //  27 % -4  ->   27 % 4
+	if (y < 0) { 
+		return  modulo( x, -y); 
+	}  
+
+	// -27 %  4  -> -(27 % 4)
+	if (x < 0) {
+		return -modulo(-x,  y); 
+	} 
+
+	if (x < y) {
+		return x;
 	}
 	
 	x = x - y;
